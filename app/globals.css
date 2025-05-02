@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 249, 250, 251;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+@layer components {
+  .sudoku-cell {
+    @apply w-10 h-10 border border-gray-300 flex items-center justify-center text-lg font-medium;
+  }
+  
+  .sudoku-cell-input {
+    @apply w-full h-full text-center outline-none bg-transparent;
+  }
+  
+  .sudoku-cell-filled {
+    @apply bg-blue-100;
+  }
+  
+  .sudoku-cell-highlight {
+    @apply bg-blue-200;
+  }
+  
+  .sudoku-cell-error {
+    @apply bg-red-100;
+  }
+  
+  .sudoku-grid {
+    @apply grid grid-cols-9 border-2 border-gray-800;
+  }
+  
+  .sudoku-grid-3x3 {
+    @apply border-r-2 border-b-2 border-gray-800;
+  }
+  
+  .btn {
+    @apply px-4 py-2 rounded-md text-white font-medium transition-colors;
+  }
+  
+  .btn-primary {
+    @apply bg-primary hover:bg-secondary;
+  }
+}
