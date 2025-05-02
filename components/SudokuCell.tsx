@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, KeyboardEvent } from 'react';
 
 interface SudokuCellProps {
   value: number | null;
@@ -32,6 +32,29 @@ const SudokuCell: React.FC<SudokuCellProps> = ({
       onChange(parseInt(lastChar, 10));
     }
   };
+  
+  // 数字入力時に自動的に次のセルへ移動する処理
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    // 数字の1-9が入力された場合
+    if (/^[1-9]$/.test(e.key)) {
+      // 入力されている数字を更新
+      onChange(parseInt(e.key, 10));
+      
+      // 次のセルにフォーカスを移動
+      // Tab キーをシミュレートする
+      const nextInput = e.currentTarget.closest('.sudoku-cell')?.nextElementSibling?.querySelector('input');
+      if (nextInput) {
+        setTimeout(() => {
+          (nextInput as HTMLInputElement).focus();
+        }, 0);
+      }
+      
+      // デフォルトの入力を防止（すでにonChangeで処理したため）
+      e.preventDefault();
+    }
+    
+    // Tabキーの場合は標準の動作を許可（自動的に次のセルに移動）
+  };
 
   // Determine cell classes based on position and state
   const borderClasses = [];
@@ -60,6 +83,7 @@ const SudokuCell: React.FC<SudokuCellProps> = ({
         type="text"
         value={value || ''}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         className="sudoku-cell-input"
         maxLength={1}
         disabled={isInitial && value !== null}
