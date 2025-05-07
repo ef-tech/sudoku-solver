@@ -221,6 +221,9 @@ export default function Home() {
           <li>解答過程がアニメーションで表示されます</li>
           <li>「リセット」ボタンで問題をクリアできます</li>
         </ol>
+        <p className="mt-2 text-red-500 font-medium">
+          注意: キーボードは必ず半角英数モードでご使用ください。全角モードではタブキーや矢印キーの挙動が正常に動作しない場合があります。
+        </p>
       </div>
     </div>
   );
